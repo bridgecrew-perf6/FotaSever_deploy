@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Launch Campaign</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+<style>
+.modals {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 )
+                url('http://i.stack.imgur.com/FhHRx.gif')
+                50% 50%
+                no-repeat;
+}
+body.loading .modals {
+    overflow: hidden;
+}
+body.loading .modals {
+    display: block;
+}
+#bbb {
+display: None;
+}
+
+#ccc {
+display: None;
+}
+
+</style>
+</head>
+<br>
+<body style="background-color:#e9ecef;">
+<div id="responsemsg"></div>
+ <div class="container-fluid">
+      <div class="p-0 mb-0 bg-dark text-white" class="font-weight-bold" ><div class="text-center"><h1>FOTA PORTAL</h1></div></div>
+
+            <form class="form-inline">
+  <div class="form-group mb-2">
+      <label>User: {{user}}</label>
+     </div>
+      </form>
+  <form class="form-inline">
+  <div class="form-group mb-2">
+      <label>Profile: {{profile}}</label>
+  </div>
+  </form>
+
+      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h1>LAUNCH CAMPAIGN</h1></div></div>
+<br>
+     {% csrf_token %}
+     <div class="row">
+
+                 <div class="col-md-6" style="margin-top: 20px;">
+                  <label for="sel1">Campaign Name:</label>
+                  <select class="form-control" id="CN">
+                    <option></option>
+                  </select>
+                </div>
+
+                <div class="col-md-6" style="margin-top: 20px;">
+                   <label>Campaign Type:</label>
+                   <input type="text" id="CT" class="form-control" placeholder="" disabled>
+               </div>
+
+                 <div class="col-md-6" style="margin-top: 20px;">
+                   <label>Start Date:</label>
+                   <input type="date" id="SD", class="form-control" placeholder="" disabled>
+               </div>
+
+                <div class="col-md-6" style="margin-top: 20px;">
+                   <label>End Date:</label>
+                   <input type="date" id="ED", class="form-control" placeholder="" disabled>
+               </div>
+
+
+                <div class="col-md-6" style="margin-top: 20px;">
+                   <label>SCOMO ID:</label>
+                   <input type="text" id="SI" class="form-control" placeholder="" disabled>
+               </div>
+
+                <div class="col-md-6" style="margin-top: 20px;">
+                   <label>ECU Name:</label>
+                   <input type="text" id="EN" class="form-control" placeholder="" disabled>
+               </div>
+
+                <div class="col-sm-12 text-center" style="margin-top:20px;">
+        <button id="btnSearch" class="btn btn-primary btn-mt-md-4 center-block" Style="width: 100px;" onclick="location.href='{%url 'Update_page'%}';">Back</button>
+         <button id="btnClear" class="btn btn-success btn-mt-md-4 center-block" Style="width: 100px;">Launch</button>
+    <!--button id="btnClear" class="btn btn-primary btn-md center-block" Style="width: 100px;" OnClick="btnClear_Click" >Next</button-->
+    </div>
+     </div>
+  </div>
+
+
+<div class="modaly"><!-- Place at bottom of page --></div>
+
+  </body>
+<button type="button" id="bbb" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Campaign Launched Successfully</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<button type="button" id="ccc" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter1">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle1">Source Version Not match for scomoid's<label id="scomo_fetch"></label></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modals"><!-- Place at bottom of page --></div>
+
+
+<script type="text/javascript">
+  $(document).ready(function(e) {
+  $body = $("body");
+   $.ajax({
+   type:'POST',
+   url:"Dynamic_cmapaignname_fetch",
+   data:{
+   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+   },
+  success: function(data){
+      $("#CN option").remove();
+      $("#CN").append('<option>'+"Select Campaign Name"+'</option>');
+      for (var i = 0 in data) {
+       $("#CN").append('<option>'+data[i]+'</option>');
+                        }
+  },
+  });
+  });
+
+
+$('#CN').on('change', function() {
+  var CampaignName = this.value;
+  $.ajax({
+   type:'POST',
+   url:"CampaignData",
+   data:{
+   'CampaignName':CampaignName,
+   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+   },
+  success: function(data){
+    console.log(data);
+    $("#CT").val(data['CT'])
+    $("#SD").val(data['SD'])
+    $("#ED").val(data['ED'])
+    $("#EN").val(data['EN'])
+    $("#SI").val(data['SI'])
+                        }
+  });
+  });
+
+
+$("#btnClear").click(function(){
+$.ajax({
+   beforeSend: function()
+    {
+     $body.addClass("loading");
+    },
+
+   type:'POST',
+   url:"Launch_campaign1",
+   data:{
+   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+   },
+  success: function(data)
+       {
+        if(data['status']=="NOK"){
+        $("#scomo_fetch").text(" " + data['scomo_id']);
+        $("#ccc").click();
+                               }
+          if(data['status']=="OK")
+          {
+               $("#bbb").click();
+          }
+          },
+  complete: function() {
+        $body.removeClass("loading");
+        }
+  });
+});
+</script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>FOTA Function</title>
+      <style>
+
+      #sss{
+      height:25px;
+      width: 250px;
+      padding: 10px;
+      }
+      #ssss{
+               width: 150px;
+               padding:5px;
+      }
+        #ppp{
+
+                width: 250px;
+                padding: 5px;
+     }
+      </style>
+  </head>
+  <br>
+  <body style="background-color:#e9ecef;">
+
+  <div class="container-fluid">
+
+ <div class="p-0 mb-0 bg-dark text-white" class="font-weight-bold" ><div class="text-center"><h1>FOTA PORTAL</h1></div></div>
+      <a href="{%url 'logout'%}"><button type="button" class="btn btn-danger float-right">Logout</button></a>
+      <form class="form-inline">
+  <div class="form-group mb-2">
+      <label>User: {{user}}</label>
+     </div>
+      </form>
+  <form class="form-inline">
+  <div class="form-group mb-2">
+      <label>Profile: {{profile}}</label>
+  </div>
+  </form>
+
+      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h1>FOTA FUNCTION</h1></div></div>
+     <br>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </div>
+ <!-- Default dropright button -->
+
+  <ul class="btn-group flex-column" >
+
+      <div class="btn-group dropright">
+
+      <button type="button" class="btn btn-success dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+      <div id="sss">
+      Vehicle Management
+      </div>
+  </button>
+
+  <div class="dropdown-menu">
+    <!-- Dropdown menu links -->
+      <a class="dropdown-item" href="{%url 'VehicleRegistration'%}"><button type="button" class="btn btn-success"><div id="ssss">Vehicle Registration</div></button></a>
+      <a class="dropdown-item" href="{%url 'vinCheck'%}"><button type="button" class="btn btn-success"><div id="ssss">Check Vehicle Details</div></button></a>
+  </div>
+</div>
+      <div class="btn-group dropright">
+  <button type="button" class="btn btn-success dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+     <div id ="sss">
+      Content Management
+         </div>
+  </button>
+  <div class="dropdown-menu">
+    <!-- Dropdown menu links -->
+      <!--div class="bg-info text-white"></div-->
+
+      <a class="dropdown-item" href="{%url 'UploadContent'%}"><button type="button" class="btn btn-success"><div id="ssss">Upload Content</div></button></a>
+      <a class="dropdown-item" href="#"><button type="button" class="btn btn-success"><div id="ssss">Sign Content</div></button></a>
+      <a class="dropdown-item" href="{%url 'ChkContent'%}"><button type="button" class="btn btn-success"><div id="ssss">Check Content</div></button></a>
+
+  </div>
+</div>
+      <div class="btn-group dropright">
+  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+    <div id="sss">
+      Version Management
+    </div>
+  </button>
+  <div class="dropdown-menu">
+      <a class="dropdown-item" href="{%url 'SetReprogRef'%}"><button type="button" class="btn btn-success"><div id="ppp">Set Reprogramming Reference</div></button></a>
+      <a class="dropdown-item" href="{%url 'SetConfigRef'%}"><button type="button" class="btn btn-success"><div id="ppp">Set Configuration Reference</div></button></a>
+  <a class="dropdown-item" href="#"><button type="button" class="btn btn-success"><div id="ppp">Check Reprogramming Reference</div></button></a>
+      <a class="dropdown-item" href="#"><button type="button" class="btn btn-success"><div id="ppp">Check Configuration Reference</div></button></a>
+  </div>
+</div>
+<div class="btn-group dropright">
+  <button type="button" class="btn btn-success dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <div id="sss">
+      Campaign Management
+    </div>
+  </button>
+
+
+  <div class="dropdown-menu">
+      <!--button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+    Dropdown button
+  </button-->
+
+      <a class="dropdown-item" href="{%url 'CampainCreate'%}"><button type="button" class="btn btn-success"><div id="ssss">Create Campaign</div></button></a>
+
+      <a class="dropdown-item" href="{%url 'LaunchCampaign'%}"><button type="button" class="btn btn-success"><div id="ssss">Launch Campaign</div></button></a>
+
+      <a class="dropdown-item" href="{%url 'CheckCampaign'%}"><button type="button" class="btn btn-success"><div id="ssss">Check Campaign</div></button></a>
+
+      </div>
+</div>
+</div>
+
+      <div class="btn-group dropright">
+  <button type="button" class="btn btn-light dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <div id="sss">
+      User Management
+    </div>
+  </button>
+
+  <div class="dropdown-menu">
+
+  </div>
+      </div>
+      </ul>
+  </body>
+</html>

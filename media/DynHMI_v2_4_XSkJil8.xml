@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CampaignDescription> xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="DynMHI_Step2.xsd">
+
+<!-- version log
+version 2.4: Move "version" attribut out of signedData tag to allow signing of its contents, SignedData tags being excluded
+version 2.3: Add new attribute "name" on translation tag. Previous syntax proposed in v2.2 was not valid.
+version 2.2: "ExternalRelNote" tag is added to support external release note to allow rich release notes support (FOTA-1078)- DynHMI_v2.2.xml
+version 2.1: Not used. Version skiped to realign xml version and version value of the version attribut.
+version 2.0: "version" tag is added. Cf App14 v2.1 and DynHMI_Step2_v2.1.xml
+Initial xml definition for step 2 was not having version tag (cf app14 v1.0) - brand new structure added for FOTA Step2
+-->
+<SignedData>
+
+  <version>2.4</version>
+  
+  <GlobalData>
+  
+    <!-- That attribute is use to specify type of SCOMO update in order to select proper screens [APPS/MAPS/SYSTEM] -->
+    <ContentType>SYSTEM</ContentType>   
+	   
+    <ReleaseNote>
+    <!-- Embedded release note information in all languages supported by the VIN shall be passed over the air.
+         The current IVI language shall be used to pick up the right entry.   -->
+    <!-- Release note tag shall support xml LF (&#xA;) and CR (&#xD;) so that on-board xml parser can manage change line.   -->
+      <Translation lang="en_GB" name="Update Campaign 1">  This version enables ...&#xA;It fixes for ... </Translation>
+      <Translation lang="fr_FR" name="Campagne de Mise à jour 1">Cette version ajoute ...&#xA;Elle corrige ... </Translation> 
+      <!-- all languages supported by the vehicle should be provided here -->
+    </ReleaseNote>
+	
+	<!-- External release note support (optional tag):
+	The vehicle will happend the locale as the suffix (e.g. fr_FR) to the below url to get the release note in the proper langage
+	In case the language is not supportted, English will be returned by the server.
+	 -->
+	<ExternalRelNote baseUrl="https://www.renault.com/support/software-updates/releaseNotes" />
+
+  </GlobalData>
+
+  <Download>
+    <!-- Setting rules for DownloadModalities's attributes:
+    WIFI Only        Bearer: EasyUpdate="NO"  USB="NO Wifi="YES"        ; networkUsage on server side shall be set to -1
+    Cellular Only    Bearer: EasyUpdate="YES" USB="NO" Wifi="NO"        ; networkUsage on server side shall be set to 0
+    Cellular OR WIFI Bearer: EasyUpdate="YES" USB="NO" Wifi="YES"       ; networkUsage on server side shall be set to 0
+    USB              Bearer: EasyUpdate="NO" USB="YES" Wifi="NO"        ; networkUsage on server side shall be set to -1 (don't care)
+    -->
+    <DownloadModalities EasyUpdate="YES" USB="NO" Wifi="NO" />
+
+    <!-- That attribute is use to specify the need of user consent for the download phase [YES/NO] -->
+    <DownloadConsent>YES</DownloadConsent>
+
+
+    <DownloadDisclaimer>
+      <!-- That attribute specifies the download disclaimer usage (Internal or External)
+	     When using internal disclaimers, the attribute gives the entry to use in the catalog.
+	     The possible values are: InternalType0, InternalType1, ... InternalType9, External
+		 When disclaimer type is External, the DownloadDisclaimer tag contents will be used to display disclaimer information. -->
+
+<!-- uncomment this if you want to use a static disclaimer
+      <DownloadDisclaimerID>DDID0</DownloadDisclaimerID>
+-->
+      <DownloadDisclaimerTxt> 
+      <!-- External disclaimer definition.
+         The current IVI language shall be used to pick up the right entry.   -->
+      <!-- Release note tag shall support xml LF (&#xA;) and CR (&#xD;) so that on-board xml parser can manage change line.   -->
+      <!-- all languages supported by the vehicle should be provided here -->
+	    <Translation lang="en_GB">The download will continue during charging and parking ... </Translation>
+        <Translation lang="fr_FR">Le chargement continuera pendant la charge vehcile ou en stationnement ....</Translation> 
+      </DownloadDisclaimerTxt>
+    </DownloadDisclaimer>
+
+    <!-- 
+     Possible values for HMIConditions: DriveStage="BEFOREDRIVING/AFTERDRIVING/DURINGDRIVING/BEFOREORAFTERDRIVING/NA" 
+                                        VehicleMotion ="STOPPED/NA"
+                                        ParkingBrake="ON/NA"
+                                        HVSOC="<PercentageValue>/NA"
+                                        HazardLamps="OFF/NA"
+     -->
+    <HMIConditions DriveStage="NA" VehicleMotion="NA" ParkingBrake="NA" HVSOC="NA" HazardLamps="NA" />
+
+	
+  </Download>
+
+  <Installation>
+    <!-- That attribute is use to specify the need of user consent for the install phase (distribution and install in backup bank) -->
+    <InstallConsent>NO</InstallConsent>
+  
+    <!-- 
+     Possible values for HMIConditions: DriveStage="BEFOREDRIVING/AFTERDRIVING/DURINGDRIVING/BEFOREORAFTERDRIVING/NA" 
+                                        VehicleMotion ="STOPPED/NA"
+                                        ParkingBrake="ON/NA"
+                                        HVSOC="<PercentageValue>/NA"
+                                        HazardLamps="OFF/NA"
+     -->
+    <HMIConditions DriveStage="AFTERDRIVING" VehicleMotion="STOPPED" ParkingBrake="ON" HVSOC="00" HazardLamps="OFF" />
+  
+	<!-- 
+     That attribute defines the estimated installation time (distribution included) for the whole package (even if multiple ECUs).
+	 The format is: hh:mm:ss
+	 It can be used by the target in case of time managed progress bar design.
+	 If the field is empty or set with a null value (00.00.00), the target has to implement a percentage progress bar design based on real time data.
+     -->
+	<InstallEstimatedTime>00:45:00</InstallEstimatedTime>
+	
+  </Installation>
+
+  <Activation>
+    <!-- That attribute is use to specify the need of user consent for the activation phase (swicth to new boot chain) [YES/NO] -->
+    <ActivationConsent>YES</ActivationConsent>
+  
+    <!-- That attribute is use to specify support of schedule activation (swicth to new boot chain at specific time) [YES/NO]-->
+    <ScheduleActivation>YES</ScheduleActivation>
+    
+    <ActivationDisclaimer>
+      <!-- That attribute specifies the activation disclaimer usage (Internal or External)
+	     When using internal disclaimers, the attribute gives the entry to use in the catalog.
+	     The possible values are: InternalType0, InternalType1, ... InternalType9, External
+		 When disclaimer type is External, the DownloadDisclaimer tag contents will be used to display disclaimer information. -->
+<!-- uncomment this if you want to use a static disclaimer
+      <ActivationDisclaimerID>ADID0</ActivationDisclaimerID>
+-->
+      <ActivationDisclaimerTxt>
+      <!-- External disclaimer definition.
+         The current IVI language shall be used to pick up the right entry.   -->
+      <!-- Release note tag shall support xml LF (&#xA;) and CR (&#xD;) so that on-board xml parser can manage change line.   -->
+        <Translation lang="en_GB">The download will continue during charging and parking ... </Translation>
+        <Translation lang="fr_FR">Le chargement continuera pendant la charge vehcile ou en stationnement ....</Translation> 
+        <!-- all languages supported by the vehicle should be provided here -->
+      </ActivationDisclaimerTxt>
+    </ActivationDisclaimer>
+	  
+    <!-- That attribute is use to pass the estimated activation time.
+	 The format is: hh:mm:ss
+     In case of non BG update type where PWT start forbidden is used, that value is critical.
+	 It will be shown to the user on activation consent or disclaimer, so that the user be aware of vehicle unavailability time.
+	 -->
+    <ActivationEstimatedTime>00:10:00</ActivationEstimatedTime>
+  
+    <!-- 
+     Possible values for HMIConditions: DriveStage="BEFOREDRIVING/AFTERDRIVING/DURINGDRIVING/BEFOREORAFTERDRIVING/NA" 
+                                        VehicleMotion ="STOPPED/NA"
+                                        ParkingBrake="ON/NA"
+                                        HVSOC="<PercentageValue>/NA"
+                                        HazardLamps="OFF/NA"
+     -->
+
+    <HMIConditions DriveStage="DURINGDRIVING" VehicleMotion="NA" ParkingBrake="ON" HVSOC="100" HazardLamps="NA" />
+	
+  </Activation>
+</SignedData>
+
+<Signature>
+MIME-Version: 1.0
+Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg="sha-256"; boundary="----1B4BC9EA2211945C96450EA1D17B1A80"This is an S/MIME signed message------1B4BC9EA2211945C96450EA1D17B1A80
+<cms>
+  <file>
+    <name>CampaignDescription.xml</name>
+    <digest>WeuF2vd3Y6+NZ8rDoW5bLspF5ggKv/eBsTMrVZFHeI8=</digest> <!-- this is the base64 coded digest of the signedData tag -->
+    <digesttype>sha256</digesttype>
+    <path>.</path>
+	<bindingId>3F2504E0-4F89-11D3-9A0C-0305E82C3301</bindingId> <!-- GUID allocated for this OTA campaign, as per RFC4122 -->
+	</file>
+</cms>
+------1B4BC9EA2211945C96450EA1D17B1A80Content-Type: application/pkcs7-signature; name="smime.p7s"Content-Transfer-Encoding: base64Content-Disposition: attachment; filename="smime.p7s"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------1B4BC9EA2211945C96450EA1D17B1A80--
+</Signature>
+
+</CampaignDescription>

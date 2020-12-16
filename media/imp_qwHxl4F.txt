@@ -1,0 +1,102 @@
+{
+   CamapaignName:$('#CN').val(),
+   CampaignType:$('#CT').val(),
+   StartDate:$('#SD').val(),
+   EndDate:$('#ED').val(),
+   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+  },
+
+    var img = $('#InputFile')[0].files[0];
+
+$(document).on('submit','#sss',function(e){
+   var data = {}
+   var data = new FormData();
+   var ctval = ""
+   var pdval = ""
+   if($(manual).is(':checked')) {
+      var vin = $('#VN').val()
+      data['mode'] = 'manual'
+      data['vin'] =  vin
+      alert("enabled")
+      ctval = 'application/x-www-form-urlencoded; charset=UTF-8';
+      pdval = true;
+    }
+    else
+    {
+    var img = $('#InputFile')[0].files[0];
+    console.log(img)
+    data['mode'] = 'import'
+    data['img'] = img
+    alert('import')
+    ctval = 'application/x-www-form-urlencoded; charset=UTF-8';
+    pdval = false;
+    }
+    data['CamapaignName'] = $('#CN').val()
+    data['CampaignType'] = $('#CT').val()
+    data['StartDate'] = $('#SD').val()
+    data['EndDate'] = $('#ED').val()
+    data['csrfmiddlewaretoken'] = $('input[name=csrfmiddlewaretoken]').val()
+  $body = $("body");
+  e.preventDefault();
+  $.ajax({
+   type:'POST',
+   url:"dk",
+   data:data,
+   enctype: 'multipart/form-data',
+   cache: false,
+   processData: false,
+   contentType: false,
+   success: function(data){
+  alert("Done")
+  },
+  });
+});
+
+
+
+$(document).on('submit','#sss',function(e){
+   var data = new FormData(this);
+   if($(manual).is(':checked')) {
+      var vin = $('#VN').val()
+      data.append('mode','manual')
+      data.append(vin,vin)
+      alert("enabled")
+    }
+    else
+    {
+     console.log(data)
+    var files = $('#InputFile')[0].files[0];
+    console.log(files)
+    data.append('file',files);
+    data.append('mode','import')
+    alert('import')
+    }
+
+    var x = $('#CN').val()
+    var y = $('#CT').val()
+    var v = $('#SD').val()
+    var p= $('#ED').val()
+    var d =  $('input[name=csrfmiddlewaretoken]').val()
+
+    data.append('CamapaignName',x)
+    data.append('CampaignType',y)
+    data.append('StartDate',v)
+    data.append('EndDate',p)
+    data.append('csrfmiddlewaretoken',d)
+
+  $body = $("body");
+  e.preventDefault();
+  $.ajax({
+   type:'POST',
+   url:"dk",
+   data:data,
+   cache: false,
+   processData: false,
+    contentType: false,
+   success: function(data){
+  alert("Done")
+  },
+  });
+});
+
+

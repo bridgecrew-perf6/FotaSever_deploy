@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Upload Content</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+<style>
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 )
+                url('http://i.stack.imgur.com/FhHRx.gif')
+                50% 50%
+                no-repeat;
+}
+body.loading .modal {
+    overflow: hidden;
+}
+body.loading .modal {
+    display: block;
+}
+</style>
+</head>
+
+<body style="background-color:#e9ecef;">
+<div id="responsemsg"></div>
+<div class="container-fluid">
+    <br>
+
+     <div class="p-0 mb-0 bg-dark text-white" class="font-weight-bold" ><div class="text-center"><h1>FOTA PORTAL</h1></div></div>
+
+               <form class="form-inline">
+      <div class="form-group mb-2">
+          <label>User: {{user}}</label>
+         </div>
+          </form>
+      <form class="form-inline">
+      <div class="form-group mb-2">
+          <label>Profile: {{profile}}</label>
+      </div>
+      </form>
+
+      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h1>UPLOAD CONTENT</h1></div></div>
+       <br>
+        <form>
+     {% csrf_token %}
+      <div class="form-group">
+        <label>ECU Name:</label>
+    <select class="form-control" id="sel1">
+      <option></option>
+    </select>
+  </div>
+         <div class="form-group">
+           <label>SCOMO ID:</label>
+    <select class="form-control" id="SD">
+      <option></option>
+    </select>
+  </div>
+
+       <div class="form-group">
+         <label>File Browse:</label>
+    <input type="file" class="form-control-file" id="InputFile" accept=".tar.gz" />
+  </div>
+      <div class="row">
+    <div class="col-sm-12 text-center">
+        <button id="btnSearch" type="button" class="btn btn-primary btn-sm center-block" Style="width: 100px;" onclick="location.href='{%url 'Update_page'%}';">Back</button>
+        <button id ="sss" type="submit"  class="btn btn-success btn-sm center-block"  Style="width: 100px;">Upload</button>
+    </div>
+</div>
+</form>
+</div>
+<div class="modal"><!-- Place at bottom of page --></div>
+</body>
+<script>
+
+
+$("form").submit(function(e){
+   e.preventDefault();
+   var data = new FormData();
+   var files = $('#InputFile')[0].files[0];
+   data.append('file',files)
+   var x = $('#sel1').val()
+   data.append('ecu_name',x)
+   var y = $('#SD').val()
+   data.append('scomo_id',y)
+   var d =  $('input[name=csrfmiddlewaretoken]').val()
+   data.append('csrfmiddlewaretoken',d)
+   $.ajax({
+   type:'POST',
+   url:"contentUpload",
+   data:data,
+   cache: false,
+   processData: false,
+   contentType: false,
+   success: function(data){
+   $("#responsemsg").append('<div class="alert alert-success alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Data has been saved successfully !</div>');
+  },
+  error:function(){
+  }
+  });
+  });
+
+
+$(document).ready(function(e) {
+   $.ajax({
+   type:'POST',
+   url:"ecuNameFetch",
+   data:{
+   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+   },
+  success: function(data){
+      $("#sel1 option").remove();
+      $("#sel1").append('<option>'+"Select Ecu"+'</option>');
+      for (var i = 0 in data) {
+       $("#sel1").append('<option>'+data[i]+'</option>');
+                        }
+ },
+ });
+ });
+
+
+$('#sel1').on('change', function() {
+   var ecuName = this.value;
+   $.ajax({
+   type:'POST',
+   url:"FecthScomo",
+   data:{
+   ecu_name: ecuName,
+   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+   },
+  success: function(data){
+      $("#SD option").remove();
+      $("#SD").append('<option>'+"Select ScomoID"+'</option>');
+      for (var i = 0 in data) {
+       $("#SD").append('<option>'+data[i]+'</option>');
+                        }
+  },
+  });
+});
+
+</script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</html>

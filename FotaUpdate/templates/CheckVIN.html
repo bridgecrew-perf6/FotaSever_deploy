@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Check Vehicle Details</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+<style>
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 )
+                url('http://i.stack.imgur.com/FhHRx.gif')
+                50% 50%
+                no-repeat;
+}
+body.loading .modal {
+    overflow: hidden;
+}
+body.loading .modal {
+    display: block;
+}
+.table td,th {
+   text-align: center;
+}
+</style>
+</head>
+<br>
+<body style="background-color:#e9ecef;">
+<div id="responsemsg"></div>
+<div class="container-fluid">
+
+    <div class="p-0 mb-0 bg-dark text-white" class="font-weight-bold" ><div class="text-center"><h1>FOTA PORTAL</h1></div></div>
+
+            <form class="form-inline">
+  <div class="form-group mb-2">
+      <label>User: {{user}}</label>
+     </div>
+      </form>
+  <form class="form-inline">
+  <div class="form-group mb-2">
+      <label>Profile: {{profile}}</label>
+  </div>
+  </form>
+
+     <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h1>CHECK VEHICLE DETAILS</h1></div></div>
+
+{% csrf_token %}
+  <div class="form-row">
+
+
+    <div class="form-group col-md-6">
+              <label>Check Vehicle Details by:</label>
+     <div class="form-check-inline">
+   <label class="form-check-label">
+    <input type="radio" class="form-check-input" name="optradio" id="manual" onclick="EnableDisableTextBox()" >VIN
+   </label>
+  </div>
+<div class="form-check-inline">
+  <label class="form-check-label">
+    <input type="radio" class="form-check-input" name="optradio" id="import" onclick="Enableecuname()" >ECU Name
+  </label>
+</div>
+  </div>
+  </div>
+     <div class="form-row">
+
+         <div class="form-group col-md-6">
+  <label for="sel1">Select Vin:</label>
+  <select class="form-control" id="VN">
+    <option></option>
+  </select>
+        </div>
+
+    <div class="form-group col-md-6">
+  <label for="sel1">Select ECU Name:</label>
+  <select class="form-control" id="SEN">
+    <option></option>
+  </select>
+        </div>
+    </div>
+      <div class="col  offset-md-3"><br>
+          <button class="col-md-2 btn btn-primary" type="button" onclick="location.href='{%url 'Update_page'%}';">Back</button>
+            <button type="button" id="sss" class="col-md-2 btn btn-success">Search</button>
+      </div>
+
+    <br>
+
+    <table id="pp" class="table table-stripped">
+  <thead>
+    <tr>
+      <th scope="col">Vehicle Details</th>
+      <th scope="col">Values</th>
+    </tr>
+  </thead>
+  <tbody id="ll">
+  </tbody>
+</table>
+
+</form>
+
+</div>
+<div class="modal"><!-- Place at bottom of page --></div>
+      </body>
+  <script type="text/javascript">
+
+   function EnableDisableTextBox()
+    {
+
+    var txtboxenable = document.getElementById("VN");
+    txtboxenable.disabled = false;
+    var sel1enable = document.getElementById("SEN");
+    sel1enable.disabled = true;
+    }
+    function Enableecuname ()
+    {
+    var txtboxenable = document.getElementById("VN");
+    txtboxenable.disabled = false;
+    var sel1enable = document.getElementById("SEN");
+    sel1enable.disabled = false;
+    }
+
+
+    $(document).ready(function(e) {
+    var sel1enable = document.getElementById("SEN");
+    sel1enable.disabled = true;
+    $(document).ready(function(e) {
+   $.ajax({
+   type:'POST',
+   url:"fetch_vin",
+   data:{
+   vin:"GiveVin",
+   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+   },
+   success: function(data){
+      $("#VN option").remove();
+      $("#VN").append('<option>'+"Select Vin"+'</option>');
+      for (var i = 0 in data) {
+         console.log(data[i]);
+       $("#VN").append('<option>'+data[i]+'</option>');
+                        }
+   },
+   });
+   });
+
+    $.ajax({
+    type:'POST',
+    url:"ecuNameFetch",
+    data:{
+    vin:"GiveVin",
+    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+    },
+    success: function(data){
+      $("#SEN option").remove();
+      $("#SEN").append('<option>'+"Select ECU Name"+'</option>');
+      for (var i = 0 in data) {
+       $("#SEN").append('<option>'+data[i]+'</option>');
+                        }
+   },
+   });
+   });
+
+$("#sss").click(function() {
+   $("#ll tr").remove();
+   if($('#manual').is(':checked')){
+   var vin_number = $('#VN').val()
+    $.ajax({
+    type:'POST',
+    url:'FetchVinOnlyData',
+    data:{
+    vin:vin_number,
+    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+        },
+    success: function(data){
+     for(var i in data) {
+     $("#ll").append('<tr><td><b>'+ i +'<b></td><td>'+ data[i] +'</td></tr>');
+                        }
+                         }
+   });
+   }
+   else{
+    var ecu_name = $('#SEN').val()
+    var vin_number = $('#VN').val()
+    $.ajax({
+    type:'POST',
+    url:'FetchVinECUData',
+    data:{
+    vin:vin_number,
+    ECU:ecu_name,
+    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+        },
+    success: function(data){
+     for(var i in data) {
+     $("#ll").append('<tr><td><b>'+ i +'</b></td><td>'+ data[i] +'</td></tr>');
+                        }
+                         }
+   });
+   }
+});
+  </script>
+</body>
+
+<script type="text/javascript">
+
+</script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</html>
