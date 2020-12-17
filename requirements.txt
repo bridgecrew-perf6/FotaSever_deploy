@@ -14,7 +14,7 @@ idna==2.10
 isodate==0.6.0
 msrest==0.6.19
 oauthlib==3.1.0
-psycopg2==2.8.6
+psycopg2-binary==2.8.6
 pycparser==2.20
 pytz==2020.1
 requests==2.24.0

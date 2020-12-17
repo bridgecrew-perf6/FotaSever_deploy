@@ -22,7 +22,7 @@ import requests
 from .serializers import ExeFetchVin
 import json
 from datetime import datetime
-
+import datetime
 # Create your views here.
 
 def IndexView(request):
