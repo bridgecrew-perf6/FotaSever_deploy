@@ -31,4 +31,4 @@ jobs:
       with:
         app-name: 'fota'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_877351fa708c4abea9de9cf4379ed2cc }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_e615b06ac7b943f0a0e71930d2904d1e }}
