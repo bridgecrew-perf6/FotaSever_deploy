@@ -29,21 +29,38 @@
      padding: 0px;
       margin-bottom: 20px;
      margin-left:250px;
-
-
-
-
      }
-
-      </style>
+     .userProfile{
+     float:right
+     }
+   .bgimg {
+    background-image: url(/static/tataconsultancyserviceslogotcs.png);
+    padding-top: 25px;
+    background-repeat: no-repeat;
+    background-size: 190px 60px;
+    height:80px;
+    width:200px;
+    margin-left:40px;
+    margin-top:30px;
+    }
+    .logout{
+    height:0px;
+    width:0px;
+    padding:0px;
+    }
+    #textid{
+    margin-left:100px;
+    }
+   </style>
   </head>
   <br>
   <body style="background-color:#e9ecef;">
-
-  <div class="container-fluid">
-
+             <div class="container-fluid">
+<div>
  <div class="p-0 mb-0 bg-dark text-white" class="font-weight-bold" ><div class="text-center"><h2>FOTA PORTAL</h2></div></div>
-      <a href="{%url 'logout'%}"><button type="button" class="btn btn-danger float-right">Logout</button></a>
+
+
+      <div class = "userProfile">
       <form class="form-inline">
   <div class="form-group mb-2">
       <label>User: {{user}}</label>
@@ -53,11 +70,21 @@
   <div class="form-group mb-2">
       <label>Profile: {{profile}}</label>
   </div>
+
   </form>
+          <form class="form-inline">
+  <div class="form-group mb-2">
+      <label><a href="{%url 'logout'%}"><b><p class="text-secondary"><u>Logout</u></p></b></a></label>
+     </div>
+      </form>
+      </div>
 
-      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>Fota Function</h3></div></div>
+
+  <div class="bgimg"></div>
+
+      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div id="textid" class="text-center"><h3>Fota Function</h3></div></div>
      <br>
-
+       </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

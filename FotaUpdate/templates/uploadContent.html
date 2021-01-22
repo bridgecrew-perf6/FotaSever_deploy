@@ -28,6 +28,10 @@ body.loading .modal {
 body.loading .modal {
     display: block;
 }
+.userProfile
+{
+ float:right;
+}
 </style>
 </head>
 
@@ -38,36 +42,39 @@ body.loading .modal {
 
      <div class="p-0 mb-0 bg-dark text-white" class="font-weight-bold" ><div class="text-center"><h2>FOTA PORTAL</h2></div></div>
 
-               <form class="form-inline">
-      <div class="form-group mb-2">
-          <label>User: {{user}}</label>
-         </div>
-          </form>
-      <form class="form-inline">
-      <div class="form-group mb-2">
-          <label>Profile: {{profile}}</label>
-      </div>
+                          <div class="userProfile">
+            <form class="form-inline">
+  <div class="form-group mb-2">
+      <label>User: {{user}}</label>
+     </div>
       </form>
+  <form class="form-inline">
+  <div class="form-group mb-2">
+      <label>Profile: {{profile}}</label>
+  </div>
+  </form>
+     </div>
+ <br/><br/><br/>
 
-      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>UPLOAD CONTENT</h3></div></div>
+      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>Upload Content</h3></div></div>
        <br>
         <form>
      {% csrf_token %}
       <div class="form-group">
-        <label>ECU Name:</label>
+        <label>ECU Name</label>
     <select class="form-control" id="sel1">
       <option></option>
     </select>
   </div>
          <div class="form-group">
-           <label>SCOMO ID:</label>
+           <label>SCOMO ID</label>
     <select class="form-control" id="SD">
       <option></option>
     </select>
   </div>
 
        <div class="form-group">
-         <label>File Browse:</label>
+         <label>File Browse</label>
     <input type="file" class="form-control-file" id="InputFile" accept=".tar.gz" />
   </div>
       <div class="row">

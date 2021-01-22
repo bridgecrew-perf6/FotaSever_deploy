@@ -9,6 +9,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 <style>
+.userProfile{
+     float:right;
+     }
 .modal {
     display:    none;
     position:   fixed;
@@ -36,7 +39,7 @@ body.loading .modal {
 <div class="container-fluid">
 
      <div class="p-0 mb-0 bg-dark text-white" class="font-weight-bold" ><div class="text-center"><h2>FOTA PORTAL</h2></div></div>
-
+<div class="userProfile">
            <form class="form-inline">
   <div class="form-group mb-2">
       <label>User: {{user}}</label>
@@ -47,20 +50,21 @@ body.loading .modal {
       <label>Profile: {{profile}}</label>
   </div>
   </form>
-
-      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>ECU DETAILS</h3></div></div>
+</div>
+    <br/><br/><br/>
+      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>ECU Details</h3></div></div>
 <br>
     <form>
         {% csrf_token %}
   <div class="form-row">
   <div class="form-group col-md-3">
-  <label for="sel1">Select Ecu Name:</label>
+  <label for="sel1">Select Ecu Name</label>
   <select class="form-control" id="sel1">
     <option></option>
   </select>
 </div>
       <div class="form-group col-md-3">
-  <label for="sel1">Scomo Id:</label>
+  <label for="sel1">Scomo Id</label>
   <select class="form-control" id="SD">
     <option></option>
   </select>
@@ -99,9 +103,13 @@ body.loading .modal {
   <tbody id="ll">
   </tbody>
 </table>
-  <button type="submit" id="sss" class="btn btn-success">Save</button>
-    <a href="{%url 'dynamicHmi'%}"><button type="button" class="btn btn-primary">Next</button></a>
-</form>
+        <div class="col  offset-md-5">
+                <button id="btnSearch" type="button" class="btn btn-primary col-md-1 center-block" onclick="location.href='{%url 'CampainCreate'%}';" Style="width: 100px;">Back</button>
+            <button type="submit" id="sss" class="col-md-1 btn btn-success">Save</button>
+    <a href="{%url 'dynamicHmi'%}"><button type="button" class="col-md-1 btn btn-info">Next</button></a>
+</div>
+
+    </form>
 </div>
 <div class="modal"><!-- Place at bottom of page --></div>
 </body>

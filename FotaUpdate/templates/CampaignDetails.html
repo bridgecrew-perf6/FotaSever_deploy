@@ -28,6 +28,10 @@ body.loading .modal {
 body.loading .modal {
     display: block;
 }
+
+.userProfile{
+     float:right;
+     }
 </style>
 </head>
 <br>
@@ -36,7 +40,7 @@ body.loading .modal {
 <div class="container-fluid">
 
     <div class="p-0 mb-0 bg-dark text-white" class="font-weight-bold" ><div class="text-center"><h2>FOTA PORTAL</h2></div></div>
-
+<div class="userProfile">
             <form class="form-inline">
   <div class="form-group mb-2">
       <label>User: {{user}}</label>
@@ -47,8 +51,8 @@ body.loading .modal {
       <label>Profile: {{profile}}</label>
   </div>
   </form>
-
-      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>CAMPAIGN DETAILS</h3></div></div>
+</div><br/><br/><br/>
+      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>Campaign Details</h3></div></div>
 <br>
 <form id="sss" method = "POST" enctype="multipart/form-data">
       {% csrf_token %}
@@ -100,15 +104,15 @@ body.loading .modal {
     <option></option>
   </select>
         </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-5">
                 <label><br></label>
     <input type="file" name ="ddd" class="form-control-file" id="InputFile" aria-describedby="fileHelp">
     </div>
     </div>
-      <div class="col  offset-md-3"><br>
-
-  <button type="submit" class="col-md-2 btn btn-success">Save</button>
-<button class="col-md-2 btn btn-primary" type="button" onclick="location.href='{%url 'CamapaignDetails1'%}';">Next</button>
+      <div class="col  offset-md-5"><br>
+ <button id="btnSearch" type="button" class="col-md-1 btn btn-primary" onclick="location.href='{%url 'Update_page'%}';" Style="width: 100px;">Back</button>
+  <button type="submit" class="col-md-1 btn btn-success">Save</button>
+<button class="col-md-1 btn btn-info" type="button" onclick="location.href='{%url 'CamapaignDetails1'%}';">Next</button>
 
       </div>
 </form>

@@ -19,7 +19,10 @@ display: None;
 .btn-status {
 float: right;
 }
-
+.userProfile
+{
+ float:right;
+}
 </style>
 </head>
 <br>
@@ -29,6 +32,7 @@ float: right;
 
     <div class="p-0 mb-0 bg-dark text-white" class="font-weight-bold" ><div class="text-center"><h2>FOTA PORTAL</h2></div></div>
 
+           <div class="userProfile">
             <form class="form-inline">
   <div class="form-group mb-2">
       <label>User: {{user}}</label>
@@ -39,8 +43,10 @@ float: right;
       <label>Profile: {{profile}}</label>
   </div>
   </form>
+     </div>
+ <br/><br/><br/>
 
-     <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>VEHICLE REGISTRATION AND DETAILS</h3></div></div>
+     <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>Vehicle Registration and Details</h3></div></div>
 
     <div class="btn-status">
         <label id="add-badge">Connection Status : </label>
@@ -49,7 +55,7 @@ float: right;
 {% csrf_token %}
   <div class="form-row">
        <div class="form-group col-md-3">
-              <label>Enter VIN:</label>
+              <label>Enter VIN</label>
       <input class="form-control" id="EVN">
     </div>
        <div class="col-auto">

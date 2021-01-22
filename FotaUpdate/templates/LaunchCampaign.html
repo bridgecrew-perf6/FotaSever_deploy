@@ -35,6 +35,10 @@ display: None;
 #ccc {
 display: None;
 }
+.userProfile
+{
+ float:right;
+}
 
 </style>
 </head>
@@ -44,6 +48,7 @@ display: None;
  <div class="container-fluid">
       <div class="p-0 mb-0 bg-dark text-white" class="font-weight-bold" ><div class="text-center"><h2>FOTA PORTAL</h2></div></div>
 
+     <div class="userProfile">
             <form class="form-inline">
   <div class="form-group mb-2">
       <label>User: {{user}}</label>
@@ -54,42 +59,44 @@ display: None;
       <label>Profile: {{profile}}</label>
   </div>
   </form>
+     </div>
+ <br/><br/><br/>
 
-      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>LAUNCH CAMPAIGN</h3></div></div>
+      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>Launch Campaign</h3></div></div>
 <br>
      {% csrf_token %}
      <div class="row">
 
                  <div class="col-md-6" style="margin-top: 20px;">
-                  <label for="sel1">Campaign Name:</label>
+                  <label for="sel1">Campaign Name</label>
                   <select class="form-control" id="CN">
                     <option></option>
                   </select>
                 </div>
 
                 <div class="col-md-6" style="margin-top: 20px;">
-                   <label>Campaign Type:</label>
+                   <label>Campaign Type</label>
                    <input type="text" id="CT" class="form-control" placeholder="" disabled>
                </div>
 
                  <div class="col-md-6" style="margin-top: 20px;">
-                   <label>Start Date:</label>
+                   <label>Start Date</label>
                    <input type="date" id="SD", class="form-control" placeholder="" disabled>
                </div>
 
                 <div class="col-md-6" style="margin-top: 20px;">
-                   <label>End Date:</label>
+                   <label>End Date</label>
                    <input type="date" id="ED", class="form-control" placeholder="" disabled>
                </div>
 
 
                 <div class="col-md-6" style="margin-top: 20px;">
-                   <label>SCOMO ID:</label>
+                   <label>SCOMO ID</label>
                    <input type="text" id="SI" class="form-control" placeholder="" disabled>
                </div>
 
                 <div class="col-md-6" style="margin-top: 20px;">
-                   <label>ECU Name:</label>
+                   <label>ECU Name</label>
                    <input type="text" id="EN" class="form-control" placeholder="" disabled>
                </div>
 

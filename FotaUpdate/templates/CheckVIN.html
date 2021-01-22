@@ -31,6 +31,10 @@ body.loading .modal {
 .table td,th {
    text-align: center;
 }
+.userProfile
+{
+ float:right;
+}
 </style>
 </head>
 <br>
@@ -39,7 +43,7 @@ body.loading .modal {
 <div class="container-fluid">
 
     <div class="p-0 mb-0 bg-dark text-white" class="font-weight-bold" ><div class="text-center"><h2>FOTA PORTAL</h2></div></div>
-
+<div class="userProfile">
             <form class="form-inline">
   <div class="form-group mb-2">
       <label>User: {{user}}</label>
@@ -50,8 +54,9 @@ body.loading .modal {
       <label>Profile: {{profile}}</label>
   </div>
   </form>
-
-     <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>CHECK VEHICLE DETAILS</h3></div></div>
+</div>
+    <br/><br/><br/>
+     <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>Check Vehicle Details</h3></div></div>
 
 {% csrf_token %}
   <div class="form-row">
@@ -74,22 +79,22 @@ body.loading .modal {
      <div class="form-row">
 
          <div class="form-group col-md-6">
-  <label for="sel1">Select Vin:</label>
+  <label for="sel1">Select Vin</label>
   <select class="form-control" id="VN">
     <option></option>
   </select>
         </div>
 
     <div class="form-group col-md-6">
-  <label for="sel1">Select ECU Name:</label>
+  <label for="sel1">Select ECU Name</label>
   <select class="form-control" id="SEN">
     <option></option>
   </select>
         </div>
     </div>
-      <div class="col  offset-md-3"><br>
-          <button class="col-md-2 btn btn-primary" type="button" onclick="location.href='{%url 'Update_page'%}';">Back</button>
-            <button type="button" id="sss" class="col-md-2 btn btn-success">Search</button>
+      <div class="col  offset-md-5"><br>
+          <button class="col-md-1 btn btn-primary" type="button" onclick="location.href='{%url 'Update_page'%}';">Back</button>
+            <button type="button" id="sss" class="col-md-1 btn btn-success">Search</button>
       </div>
 
     <br>

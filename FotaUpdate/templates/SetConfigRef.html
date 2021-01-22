@@ -28,6 +28,10 @@ body.loading .modal {
 body.loading .modal {
     display: block;
 }
+.userProfile
+{
+ float:right;
+}
 </style>
 </head>
 <br>
@@ -37,7 +41,8 @@ body.loading .modal {
 
      <div class="p-0 mb-0 bg-dark text-white" class="font-weight-bold" ><div class="text-center"><h2>FOTA PORTAL</h2></div></div>
 
-           <form class="form-inline">
+         <div class="userProfile">
+            <form class="form-inline">
   <div class="form-group mb-2">
       <label>User: {{user}}</label>
      </div>
@@ -47,37 +52,39 @@ body.loading .modal {
       <label>Profile: {{profile}}</label>
   </div>
   </form>
+     </div>
+ <br/><br/><br/>
 
-      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>Set Reprogramming Reference</h3></div></div>
+      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>Set Configuration Reference</h3></div></div>
 <br>
     <form>
         {% csrf_token %}
   <div class="form-row">
   <div class="form-group col-md-3">
-  <label for="sel1">Select ECU Name:</label>
+  <label for="sel1">Select ECU Name</label>
   <select class="form-control" id="sel1">
     <option></option>
   </select>
 </div>
       <div class="form-group col-md-3">
-              <label>ECU Hardware:</label>
+              <label>ECU Hardware</label>
       <input class="form-control" id="SV">
     </div>
 
       <div class="form-group col-md-3">
-              <label>ECU Configuration Reference:</label>
+              <label>ECU Configuration Reference</label>
       <input class="form-control" id="SV">
     </div>
         <div class="form-group col-md-3">
-              <label>ECU New Configuration Reference:</label>
+              <label>ECU New Configuration Reference</label>
       <input class="form-control" id="TV">
     </div>
 
 </div>
   <div class="row">
     <div class="col-sm-12 text-center">
-        <button id="btnSearch" type="button" class="btn btn-primary btn-sm center-block" Style="width: 100px;">Back</button>
-         <button id ="sss" type="submit"  class="btn btn-success btn-sm center-block"  Style="width: 100px;">Set</button>
+        <button id="btnSearch" type="button" class="col-md-1 btn btn-primary center-block" Style="width: 100px;">Back</button>
+         <button id ="sss" type="submit"  class="col-md-1 btn btn-success center-block"  Style="width: 100px;">Set</button>
 
     </div>
 </div>
