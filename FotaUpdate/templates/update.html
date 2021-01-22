@@ -12,8 +12,8 @@
       <style>
 
       #sss{
-      height:25px;
-      width: 250px;
+      height:50px;
+      width: 300px;
       padding: 10px;
       }
       #ssss{
@@ -25,6 +25,16 @@
                 width: 250px;
                 padding: 5px;
      }
+     #pp{
+     padding: 0px;
+      margin-bottom: 20px;
+     margin-left:250px;
+
+
+
+
+     }
+
       </style>
   </head>
   <br>
@@ -32,7 +42,7 @@
 
   <div class="container-fluid">
 
- <div class="p-0 mb-0 bg-dark text-white" class="font-weight-bold" ><div class="text-center"><h1>FOTA PORTAL</h1></div></div>
+ <div class="p-0 mb-0 bg-dark text-white" class="font-weight-bold" ><div class="text-center"><h2>FOTA PORTAL</h2></div></div>
       <a href="{%url 'logout'%}"><button type="button" class="btn btn-danger float-right">Logout</button></a>
       <form class="form-inline">
   <div class="form-group mb-2">
@@ -45,7 +55,7 @@
   </div>
   </form>
 
-      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h1>FOTA FUNCTION</h1></div></div>
+      <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>Fota Function</h3></div></div>
      <br>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -53,86 +63,79 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </div>
  <!-- Default dropright button -->
-
+<div class="float-left">
   <ul class="btn-group flex-column" >
-
-      <div class="btn-group dropright">
-
-      <button type="button" class="btn btn-success dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-      <div id="sss">
-      Vehicle Management
-      </div>
+ <div class="btn-group dropright">
+  <button type="button" class="btn btn-success">
+      <div id="sss"><h5>Vehicle Management</h5></div>
   </button>
-
+  <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropright</span>
+  </button>
   <div class="dropdown-menu">
     <!-- Dropdown menu links -->
-      <a class="dropdown-item" href="{%url 'VehicleRegistration'%}"><button type="button" class="btn btn-success"><div id="ssss">Vehicle Registration</div></button></a>
+       <a class="dropdown-item" href="{%url 'VehicleRegistration'%}"><button type="button" class="btn btn-success"><div id="ssss">Vehicle Registration</div></button></a>
       <a class="dropdown-item" href="{%url 'vinCheck'%}"><button type="button" class="btn btn-success"><div id="ssss">Check Vehicle Details</div></button></a>
   </div>
 </div>
-      <div class="btn-group dropright">
-  <button type="button" class="btn btn-success dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-     <div id ="sss">
-      Content Management
-         </div>
+
+<br>
+
+<div class="btn-group dropright">
+  <button type="button" class="btn btn-success">
+      <div id="sss"><h5>Content Management</h5></div>
+  </button>
+  <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropright</span>
   </button>
   <div class="dropdown-menu">
     <!-- Dropdown menu links -->
-      <!--div class="bg-info text-white"></div-->
-
-      <a class="dropdown-item" href="{%url 'UploadContent'%}"><button type="button" class="btn btn-success"><div id="ssss">Upload Content</div></button></a>
+<a class="dropdown-item" href="{%url 'UploadContent'%}"><button type="button" class="btn btn-success"><div id="ssss">Upload Content</div></button></a>
       <a class="dropdown-item" href="#"><button type="button" class="btn btn-success"><div id="ssss">Sign Content</div></button></a>
       <a class="dropdown-item" href="{%url 'ChkContent'%}"><button type="button" class="btn btn-success"><div id="ssss">Check Content</div></button></a>
-
   </div>
 </div>
+      <br>
+
       <div class="btn-group dropright">
-  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-    <div id="sss">
-      Version Management
-    </div>
+  <button type="button" class="btn btn-success">
+      <div id="sss"><h5>Version Management</h5></div>
+  </button>
+  <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropright</span>
   </button>
   <div class="dropdown-menu">
-      <a class="dropdown-item" href="{%url 'SetReprogRef'%}"><button type="button" class="btn btn-success"><div id="ppp">Set Reprogramming Reference</div></button></a>
+    <!-- Dropdown menu links -->
+<a class="dropdown-item" href="{%url 'SetReprogRef'%}"><button type="button" class="btn btn-success"><div id="ppp">Set Reprogramming Reference</div></button></a>
       <a class="dropdown-item" href="{%url 'SetConfigRef'%}"><button type="button" class="btn btn-success"><div id="ppp">Set Configuration Reference</div></button></a>
   <a class="dropdown-item" href="#"><button type="button" class="btn btn-success"><div id="ppp">Check Reprogramming Reference</div></button></a>
       <a class="dropdown-item" href="#"><button type="button" class="btn btn-success"><div id="ppp">Check Configuration Reference</div></button></a>
   </div>
 </div>
-<div class="btn-group dropright">
-  <button type="button" class="btn btn-success dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    <div id="sss">
-      Campaign Management
-    </div>
+      <br>
+
+       <div class="btn-group dropright">
+  <button type="button" class="btn btn-success">
+      <div id="sss"><h5>Campaign Management</h5></div>
   </button>
-
-
+  <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropright</span>
+  </button>
   <div class="dropdown-menu">
-      <!--button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-    Dropdown button
-  </button-->
-
-      <a class="dropdown-item" href="{%url 'CampainCreate'%}"><button type="button" class="btn btn-success"><div id="ssss">Create Campaign</div></button></a>
+    <!-- Dropdown menu links -->
+  <a class="dropdown-item" href="{%url 'CampainCreate'%}"><button type="button" class="btn btn-success"><div id="ssss">Create Campaign</div></button></a>
 
       <a class="dropdown-item" href="{%url 'LaunchCampaign'%}"><button type="button" class="btn btn-success"><div id="ssss">Launch Campaign</div></button></a>
 
       <a class="dropdown-item" href="{%url 'CheckCampaign'%}"><button type="button" class="btn btn-success"><div id="ssss">Check Campaign</div></button></a>
-
-      </div>
-</div>
-</div>
-
-      <div class="btn-group dropright">
-  <button type="button" class="btn btn-light dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    <div id="sss">
-      User Management
-    </div>
-  </button>
-
-  <div class="dropdown-menu">
-
   </div>
-      </div>
-      </ul>
+</div>
+
+</ul>
+  </div>
+
+      <br>
+      <br>
+
   </body>
 </html>

@@ -1,6 +1,5 @@
 import datetime
 import os
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -374,7 +373,9 @@ def Launch_campaign(request):
 
                 # update twin according to reported property
                 temp[s.scomoID_name] = target_version
-                temp[scomo_name_fileref] = file_name
+                # call azure function
+                sas_url = upload_file_on_cloud(file_name)
+                temp[scomo_name_fileref] = sas_url
                 ecu_name = ecu_mapping[ecu_name_without_map]
                 dataStructureDict[ecu_name] = temp
 
@@ -631,6 +632,23 @@ def GetCampaignStatus(request):
                 if twin.properties.reported['Campaign_name'] == campaignName:
                     Final_dict[str(v.vinNumber)] = twin.properties.reported['status']
             return JsonResponse(Final_dict)
+
+
+def check_all_vin_status():
+    all_vin = VinNumber.objects.all()
+    vin_dict = {}
+    i = 0
+    for value in all_vin:
+        vin_number_counter = "VinNumber"
+        i = i + 1
+        vin_number_counter = vin_number_counter + str(i)
+        twin = get_twin(value["vinNumber"])
+        connection_state = twin.connection_state
+        vin_dict[vin_number_counter] = (value["vinNumber"], connection_state)
+        return JsonResponse(vin_dict)
+
+
+
 
 
 
