@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View
 from .forms import LoginForm, UpdateForm, UpdateCurrentDetails
 from .Azurefunctions import get_current_version, upload_file_on_cloud, update_desired_property_and_file, update_twin, \
-    get_reported_property, get_twin
+    get_reported_property, get_twin, get_registry_manager, get_twin1
 from django.core.files.storage import FileSystemStorage
 import uuid
 from .models import VinNumber, EcuName, ScomoID, ContentFile, CampaignDetail, FwVersion, dynamichmi, DiscardedVin
@@ -634,17 +634,15 @@ def GetCampaignStatus(request):
             return JsonResponse(Final_dict)
 
 
-def check_all_vin_status():
-    all_vin = VinNumber.objects.all()
-    vin_dict = {}
-    i = 0
-    for value in all_vin:
-        vin_number_counter = "VinNumber"
-        i = i + 1
-        vin_number_counter = vin_number_counter + str(i)
-        twin = get_twin(value["vinNumber"])
-        connection_state = twin.connection_state
-        vin_dict[vin_number_counter] = (value["vinNumber"], connection_state)
+def check_all_vin_status(request):
+    if request.method == 'POST':
+        all_vin = VinNumber.objects.all()
+        vin_dict = {}
+        iot_hub_registryManager = get_registry_manager()
+        for value in all_vin:
+            twin = get_twin1(value.vinNumber, iot_hub_registryManager)
+            connection_state = twin.connection_state
+            vin_dict[str(value.vinNumber)] = connection_state
         return JsonResponse(vin_dict)
 
 

@@ -10,7 +10,6 @@ from datetime import datetime, timedelta
 import tarfile
 import json
 
-
 IOTHUB_CONNECTION_STRING = "HostName=fotaiothub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=cBHlzfMi1kW35vePPexsv9mZ7wW02owBGfxTuPc/KAs="
 
 
@@ -90,7 +89,8 @@ def upload_file_on_cloud(file_name):
                 )
                 url_with_sas = f"{url}?{sas_token}"
                 return url_with_sas
-    except Exception as e: print(e)
+    except Exception as e:
+        print(e)
 
 
 def update_twin(data_structure, vin_list, Campaign_name):
@@ -114,6 +114,14 @@ def get_twin(device_id):
         print("something went wrong")
 
 
+def get_twin1(device_id, iothub_registry_manager):
+    try:
+        twin = iothub_registry_manager.get_twin(device_id)
+        return twin
+    except:
+        print("something went wrong")
+
+
 def get_reported_property(twin, ecu_name, field):
     try:
         return twin.properties.reported['eculist'][ecu_name][field]
@@ -126,5 +134,3 @@ def get_reported_status(twin):
         return twin.properties.reported['status']
     except:
         print("Something went wrong!")
-
-

@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <title>FOTA Function</title>
       <style>
 
@@ -38,7 +38,7 @@
     padding-top: 25px;
     background-repeat: no-repeat;
     background-size: 190px 60px;
-    height:80px;
+    height:70px;
     width:200px;
     margin-left:40px;
     margin-top:30px;
@@ -51,6 +51,13 @@
     #textid{
     margin-left:100px;
     }
+    .tb{
+    float:left;
+    margin-left:340px;
+     }
+    .bd{
+    float:left;
+     }
    </style>
   </head>
   <br>
@@ -58,7 +65,7 @@
              <div class="container-fluid">
 <div>
  <div class="p-0 mb-0 bg-dark text-white" class="font-weight-bold" ><div class="text-center"><h2>FOTA PORTAL</h2></div></div>
-
+   {% csrf_token %}
 
       <div class = "userProfile">
       <form class="form-inline">
@@ -90,6 +97,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </div>
  <!-- Default dropright button -->
+             <div>
+<div class="bd">
 <div class="float-left">
   <ul class="btn-group flex-column" >
  <div class="btn-group dropright">
@@ -160,9 +169,80 @@
 
 </ul>
   </div>
+</div>
+                 <div class="tb" id="base">
+             <table class="table table-bordered" id="vintable">
+  <thead>
 
+  </thead>
+  <tbody>
+
+  </tbody>
+</table>
+                 </div>
       <br>
       <br>
-
+             </div>
   </body>
+
+
+<script type="text/javascript">
+    $(document).ready(function(e) {
+    $.ajax({
+    beforeSend: function()
+    {
+    $("#vintable").empty();
+    $("#base").append('<div id="ss1" class="spinner-border text-success" role="status"><span class="sr-only">Loading...</span></div>');
+    },
+    type:'POST',
+    url:"GetVinStatus",
+    data:{
+    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+    },
+    success: function(data){
+    count = 0;
+    $("#vintable").append('<tr class="table-active"><th>'+'No.'+'</th><th>'+'Vin Numbers'+'</th><th>'+'Connection Status '+'</th></tr>');
+     for (var i = 0 in data) {
+     count = count + 1;
+           $("#vintable").append('<tr><td>'+count+'</td><td>'+i+'</td><td>'+data[i]+'</td></tr>');
+   }
+    $("#vintable").append('<button id="ref" type="button" class="btn btn-secondary">Refresh</button>');
+   },
+    complete: function() {
+       $('#ss1').remove();
+        }
+   });
+   });
+
+
+
+$(document).on("click", "#ref", function(){
+    $.ajax({
+    beforeSend: function()
+    {
+    $("#vintable").empty();
+    $("#base").append('<div id="ss1" class="spinner-border text-success" role="status"><span class="sr-only">Loading...</span></div>');
+    },
+    type:'POST',
+    url:"GetVinStatus",
+    data:{
+    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+    },
+    success: function(data){
+    count = 0;
+    $("#vintable").append('<tr class="table-active"><th>'+'No.'+'</th><th>'+'Vin Numbers'+'</th><th>'+'Connection Status '+'</th></tr>');
+     for (var i = 0 in data) {
+     count = count + 1;
+           $("#vintable").append('<tr><td>'+count+'</td><td>'+i+'</td><td>'+data[i]+'</td></tr>');
+   }
+              $("#vintable").append('<button id="ref" type="button" class="btn btn-secondary">Refresh</button>');
+   },
+    complete: function() {
+    $('#ss1').remove();
+        }
+   });
+});
+
+</script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 </html>

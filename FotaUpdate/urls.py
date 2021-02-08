@@ -37,6 +37,7 @@ urlpatterns = [
     path('FetchAndCheckVinDetails', views.FetchAndCheckVinDetails, name="FetchAndCheckVinDetails"),
     path('CheckCampaign', views.CampaignCheck, name="CheckCampaign"),
     path('FetchFilterCampaign', views.FetchFilterCampaign, name="FetchFilterCampaign"),
-    path('GetCampaignStatus', views.GetCampaignStatus, name="GetCampaignStatus")
+    path('GetCampaignStatus', views.GetCampaignStatus, name="GetCampaignStatus"),
+    path('GetVinStatus', views.check_all_vin_status, name="GetVinStatus")
 ]
 

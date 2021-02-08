@@ -32,6 +32,18 @@ body.loading .modal {
 {
      float:right;
  }
+
+.bgimg{
+    background-image: url(/static/tataconsultancyserviceslogotcs.png);
+    padding-top: 25px;
+    background-repeat: no-repeat;
+    background-size: 190px 60px;
+    height:70px;
+    width:200px;
+    margin-left:40px;
+    margin-top:10px;
+}
+
 </style>
 </head>
 <br>
@@ -52,7 +64,7 @@ body.loading .modal {
   </div>
   </form>
 </div>
-     <br/><br/><br/>
+      <div class="bgimg"></div>
       <div class="p-0 mb-0 bg-info text-white" class="font-weight-bold" ><div class="text-center"><h3>Check Content</h3></div></div>
 <br>
 
@@ -101,7 +113,7 @@ body.loading .modal {
       </body>
 <script type="text/javascript">
 
-$(document).ready(function(e) {
+$(window).load(function(e) {
    $.ajax({
    type:'POST',
    url:"ecuNameFetch",
@@ -109,6 +121,7 @@ $(document).ready(function(e) {
    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
    },
   success: function(data){
+
       $("#sel1 option").remove();
       $("#sel1").append('<option>'+"Select Ecu"+'</option>');
       for (var i = 0 in data) {
